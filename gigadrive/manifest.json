@@ -1,6 +1,6 @@
 {
-  "name": "gigaDrive",
-  "short_name": "gigaDrive",
+  "name": "gigaDrive Preview",
+  "short_name": "devGigaDrive",
   "description": "A online storage application",
   "start_url": "/sigmadrive",
   "display": "standalone",
