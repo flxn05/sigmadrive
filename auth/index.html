@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+    <script src="auth.js"></script>
+    <title>redirecting ....</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            background-color: #3a3a3a;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        ::-webkit-scrollbar {
+            display: none;
+        }
+
+        main {
+            background-color: #2e2e2e;
+            display: flex;
+            /* Change this to flex to show the main content */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-radius: 1rem;
+            color: white;
+            height: 36vh;
+            width: 72vw;
+            max-height: 512px;
+            max-width: 512px;
+        }
+
+        .loadingTakesLong,
+        .tookTooLong,
+        .retry {
+            display: none;
+            /* Hide these elements initially */
+        }
+
+        button {
+            background-color: #12b886;
+            padding-block: 8px;
+            margin-top: 1.5rem;
+            cursor: crosshair;
+            padding: 1rem;
+            border-radius: 1rem;
+            margin-block: 8px;
+            padding-inline: 18px;
+            padding-block: 8px;
+            border-radius: 1rem;
+            border: none;
+            color: white;
+        }
+        .loadingBar1 {
+            animation: loadingBar1 cubic-bezier(.14,.78,.68,.95) both 4s;
+            height: 2px;
+            border-radius: 4px;
+            background-color: #12b886;
+        }
+        .loadingBar2 {
+            animation: loadingBar2 cubic-bezier(.14,.78,.68,.95) both 4s;
+            height: 2px;
+            border-radius: 4px;
+            background-color: #12b886;
+        }
+        .loadingBar3 {
+            display: none;
+        }
+        @keyframes loadingBar1 {
+            0% {width: 0%;}
+            100% {width: 50%;}
+        }
+        @keyframes loadingBar2 {
+            0% {width: 50%;}
+            100% {width: 96%;}
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <img alt="gigaChat" src="icons8-cloud.png">
+        <p class="redirecting">redirecting...</p>
+        <p class="loadingTakesLong">just a second...</p>
+        <p class="tookTooLong" style="color: rgb(255, 157, 157);">Request took too long.</p>
+        <button class="retry" onclick="window.location.reload()">RETRY</button>
+        <div class="loadingBar1" id="loadingBar"></div>
+    </main>
+    <script>
+        // Display the main content
+        document.querySelector('main').style.display = 'flex';
+
+        // Display .redirecting for 4 seconds
+        document.querySelector('.redirecting').style.display = 'block';
+        setTimeout(() => {
+            document.querySelector('.redirecting').style.display = 'none';
+            // Display .loadingTakesLong for 4 seconds
+            document.querySelector('.loadingTakesLong').style.display = 'block';
+            setTimeout(() => {
+                document.querySelector('.loadingTakesLong').style.display = 'none';
+                // Display .tookTooLong and .retry
+                document.querySelector('.tookTooLong').style.display = 'block';
+                document.querySelector('.retry').style.display = 'block';
+            }, 4000); // 4 seconds
+        }, 4000); // 4 seconds
+
+
+
+
+        // Function to change loading bar classes
+    function changeLoadingBar() {
+        const loadingBar = document.getElementById('loadingBar');
+
+        // After 4 seconds, change from loadingBar1 to loadingBar2
+        setTimeout(() => {
+            loadingBar.classList.remove('loadingBar1');
+            loadingBar.classList.add('loadingBar2');
+        }, 4000);
+
+        // After another 4 seconds, change from loadingBar2 to loadingBar3
+        setTimeout(() => {
+            loadingBar.classList.remove('loadingBar2');
+            loadingBar.classList.add('loadingBar3');
+        }, 8000); // 4 seconds after the first timeout
+    }
+
+    // Start the loading bar changes
+    changeLoadingBar();
+    </script>
+</body>
+
+</html>

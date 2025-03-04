@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invalid link</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    body {
+      background-color: #3a3a3a;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    ::-webkit-scrollbar {
+      display: none;
+    }
+
+    main {
+      background-color: #2e2e2e;
+      display: flex;
+      /* Change this to flex to show the main content */
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 1rem;
+      color: white;
+      height: 36vh;
+      width: 72vw;
+      max-height: 512px;
+      max-width: 512px;
+    }
+
+    button {
+      background-color: #12b886;
+      padding-block: 8px;
+      margin-top: 1.5rem;
+      cursor: crosshair;
+      padding: 1rem;
+      border-radius: 1rem;
+      margin-block: 8px;
+      padding-inline: 18px;
+      padding-block: 8px;
+      border-radius: 1rem;
+      border: none;
+      color: white;
+    }
+    .con {
+      display: grid;
+      grid-template-columns: auto auto;
+    }
+    #linkInfo {
+      font-size: .8rem;
+      translate: 0 4px;
+      color: lightgray;
+    }
+    @media (max-width: 768px) {
+      .con {
+        display: none;
+      }
+      
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <img alt="gigaChat" src="icons8-cloud.png">
+    <div class="con">
+      <p id="linkInfo"></p>
+      <p>&nbsp;is invalid.</p>
+    </div>
+    <div class="mobCon">
+      <p>404: invalid link</p>
+    </div>
+    <a href="https://gigadrive.ddns.net"><button>Go Home</button></a>
+    <div class="loadingBar1" id="loadingBar"></div>
+  </main>
+</body>
+
+</html>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const linkInfo = document.getElementById("linkInfo");
+    const currentUrl = window.location.href;
+    linkInfo.textContent = `${currentUrl}`;
+  });
+</script>

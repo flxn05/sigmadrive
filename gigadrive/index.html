@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+	<script src="webszite4.js" defer></script>
+	<script src="client.js"></script>
+	<title>Home | gigaDrive</title>
+	<link id="stylesheet" rel="stylesheet" href="styles.css">
+	<link rel="icon" type="image/x-icon" href="icons8-cloud.png">
+	<link rel="manifest" href="manifest.json">
+	<script>
+		function updateStylesheet() {
+			const stylesheet = document.getElementById("stylesheet");
+			if (window.innerWidth <= 768) {
+				stylesheet.href = "mobile.css";
+			} else {
+				stylesheet.href = "styles.css";
+			}
+		}
+
+		updateStylesheet();
+		window.addEventListener("resize", updateStylesheet);
+	</script>
+</head>
+
+<body>
+		<div class="start">
+		<div>verifying...</div>
+	</div>
+	<h1 id="h1">gigaDrive</h1>
+	<div class="spacer"></div>
+	</section>
+	<div class="spacer"></div>
+	<section id="fileArea">
+		<!--appear when long pressed or selection
+		<div class="filesFilterCon">
+			<div onclick="" class="filesFilterFilter">[LOAD]</div>
+			<div onclick="" class="filesFilterFilter">[ZIPLOAD]</div>
+			<div onclick="" class="filesFilterFilter">[CANCEL]</div>
+		-->
+		</div>
+		<div class="headFiles">
+			<div class="filesFilterCon">
+				<div onclick="" class="filesFilterFilter">SELECT</div>
+				<div onclick="clearFilter()" class="filesFilterFilter">ALL</div>
+
+				<div onclick="filter('red')" class="filesFilter">
+					<div class="filesFilterColor" style="background-color: var(--red);"></div>
+					<div class="filesFilterName">Red</div>
+				</div><!--filter-->
+
+				<div onclick="filter('green')" class="filesFilter">
+					<div class="filesFilterColor" style="background-color: var(--green);"></div>
+					<div class="filesFilterName">Green</div>
+				</div><!--filter-->
+
+				<div onclick="filter('yellow')" class="filesFilter">
+					<div class="filesFilterColor" style="background-color: var(--yellow);"></div>
+					<div class="filesFilterName">Yellow</div>
+				</div><!--filter-->
+
+				<div onclick="filter('blue')" class="filesFilter">
+					<div class="filesFilterColor" style="background-color: var(--blue);"></div>
+					<div class="filesFilterName">Blue</div>
+				</div><!--filter-->
+
+				<div onclick="filter('purple')" class="filesFilter">
+					<div class="filesFilterColor" style="background-color: var(--purple);"></div>
+					<div class="filesFilterName">Purple</div>
+				</div><!--filter-->
+
+				<div onclick="filter('white')" class="filesFilter">
+					<div class="filesFilterColor" style="background-color: var(--white);"></div>
+					<div class="filesFilterName">White</div>
+				</div><!--filter-->
+
+			</div> <!--filterfilter-->
+		</div>
+		<div id="fileList">
+			<div class="loading">loading your files ...</div>
+			<!--file list here-->
+			<div class="fileLink">filelink</div>
+		</div><!--close filelist-->
+	</section><!--close filearea-->
+
+
+	<nav id="menuArea">
+		<div title="Home" id="homeLink" class="active" onclick="listFiles()"><img src="home.svg">
+			<div class="text">Home</div>
+		</div>
+		<div title="Upload" id="uploadLink"><img src="upload.png">
+			<div class="text">Upload</div>
+		</div>
+		<div title="Storage" id="diskSpace"><img src="disk.png">
+			<div class="text">Storage</div>
+		</div>
+		<div title="Settings" id="settingsLink"><img src="settings.svg">
+			<div class="text">About</div>
+		</div>
+		<div title="Logout" id="logoutLink" onclick="logout()"><img src="logout.png" style="scale: .8;">
+			<div class="text">Logout</div>
+		</div>
+		<!--<div id="zuck">up(deb)</div>-->
+	</nav>
+
+
+	<!--hidden-->
+	<div id="uploadPopupCon" class="popupCon">
+		<div id="uploadPopup" class="popup">
+			<img src="upload.png" class="popupIcon">
+			<h2>Upload</h2>
+			<div class="breaker"></div>
+
+			<p id="fffi" class="exclude"></p>
+
+
+			<!--select Name, Access-->
+			<section class="uploadSectionUpload">
+				<label for="addFile" class="droppingNotActive">
+				</label>
+				<input type="file" id="addFile" style="opacity: 0; scale: 0;" multiple>
+				<div class="primarySecondaryContainer buttons">
+					<div onclick="filter('red')" class="filesFilter">
+						<div class="filesFilterColor" style="background-color: var(--red);"></div>
+						<div class="filesFilterName">Red</div>
+					</div><!--filter-->
+
+					<div onclick="filter('green')" class="filesFilter">
+						<div class="filesFilterColor" style="background-color: var(--green);"></div>
+						<div class="filesFilterName">Green</div>
+					</div><!--filter-->
+
+					<div onclick="filter('yellow')" class="filesFilter">
+						<div class="filesFilterColor" style="background-color: var(--yellow);"></div>
+						<div class="filesFilterName">Yellow</div>
+					</div><!--filter-->
+
+					<div onclick="filter('blue')" class="filesFilter">
+						<div class="filesFilterColor" style="background-color: var(--blue);"></div>
+						<div class="filesFilterName">Blue</div>
+					</div><!--filter-->
+
+					<div onclick="filter('purple')" class="filesFilter">
+						<div class="filesFilterColor" style="background-color: var(--purple);"></div>
+						<div class="filesFilterName">Purple</div>
+					</div><!--filter-->
+
+					<div onclick="filter('white')" class="filesFilter">
+						<div class="filesFilterColor" style="background-color: var(--white);"></div>
+						<div class="filesFilterName">White</div>
+					</div><!--filter-->
+				</div>
+				<input type="text" id="tag" placeholder="Tags" style="color: black;" class="inputField">
+				<div class="primarySecondaryContainer">
+					<button class="secondary" onclick="
+            document.getElementById('uploadPopupCon').style.display = 'none';
+        document.getElementById('h1').style.filter = 'none';
+        document.title = 'Home | gigaDrive';
+        document.getElementById('homeLink').classList.add('active');
+        document.getElementById('uploadLink').classList.remove('active');" style="z-index: 99;">Cancel</button>
+					<button onclick="sendChunks()" id="uploadNow" class="primary">Upload</button>
+				</div> <!--close primarySecondaryContainer-->
+			</section>
+		</div>
+	</div>
+
+	<!--hidden-->
+	<div id="settingsPopupCon" class="popupCon">
+		<div id="" class="popup">
+			<img src="settings.svg" class="popupIcon">
+			<h2 id="popupSettingsUsername">About</h2>
+			<div class="breaker"></div>
+			<!--select Name, Access-->
+			<section class="uploadSectionUpload">
+				<!--credits-->
+				<p style="text-align: center;">credits</p>
+				<p style="font-size: .9rem; color: grey; text-align: center;">Backend: David Ott<br>Frontend: Jonathan
+					Wallasch<br>Design: Felix Nowak<br><a href="https://icons8.com" target="_blank"
+						style="font-size: .9rem; color: grey; text-decoration: underline;">Icons by Icons8</a></p>
+				<p style="text-align: center;">version</p>
+				<p style="font-size: .9rem; color: grey; text-align: center; line-height: 1rem;"> 2.4 (development)</p>
+				<p style="font-size: .9rem; color: grey; text-align: center; line-height: 1rem;">Update: link sharing, Tags</p>
+				<p style="text-align: center;" class="shareLink">share this workspace</p>
+				<!--development, beta, public-->
+				<div style="display: flex; justify-content: center; margin-top: 2rem;">
+					<button class="secondary" onclick="
+        document.getElementById('settingsPopupCon').style.display = 'none';
+        document.getElementById('h1').style.filter = 'none';
+        document.title = 'Home | gigaDrive';
+        document.getElementById('homeLink').classList.add('active');
+        document.getElementById('settingsLink').classList.remove('active');">Close</button>
+				</div>
+
+			</section> <!--close uploadsectionupload section-->
+		</div>
+	</div>
+
+	<!--hidden-->
+	<div id="warningPopupCon" class="popupCon">
+		<div id="websocketPopup" class="popup" style="padding: 1rem; line-height: 3rem;">
+			<h2>Sorry!</h2>
+			<div class="breaker"></div>
+			<div style="text-align: center; line-height: 2rem;">Current file transfers
+				are corrupted, please delete them.<br><span
+					style="letter-spacing: 2px; color: lightpink; font-family: monospace;">WEBSOCKET_ERROR</span></div>
+			<div>
+				<div class="primarySecondaryContainer">
+					<button class="secondary" style="margin-right: 1rem;" onclick="
+                document.getElementById('warningPopupCon').style.display = 'none';
+        document.getElementById('h1').style.filter = 'none';
+        document.title = 'Home | gigaDrive';
+        ">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--hidden-->
+	<div id="diskPopupCon" class="popupCon">
+		<div id="diskPopup" class="popup">
+			<img src="disk.png" class="popupIcon">
+			<h2>Storage</h2>
+			<div class="breaker"></div>
+			<div class="storageInfoText"><b id="usedSpace" style="color: var(--accent);">undefined</b> GB of <b
+					id="totalSpace" style="color: var(--accent);">undefined</b> GB used.</div>
+
+			<div id="statusBarDownload0"></div>
+
+
+
+			<div class="primarySecondaryContainer">
+				<button class="secondary" onclick="
+        document.getElementById('diskPopupCon').style.display = 'none';
+        document.getElementById('h1').style.filter = 'none';
+        document.title = 'Home | gigaDrive';
+        document.getElementById('homeLink').classList.add('active');
+        document.getElementById('diskSpace').classList.remove('active');
+        ">Close</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+	<div id="uploadStatusPopupCon" class="popupCon">
+		<div id="uploadStatusPopup" class="popup">
+			<h2 class="smallPopupHeading">Uploading</h2>
+			<div class="uploadStatus">Thanks for using gigaDrive!</div>
+			<div class="uploadStatus">Don't close the gigaDrive Application</div>
+			<div class="uploadStatus">Saving big files can take time ....</div>
+			<div class="uploadStatus">Looks like it's gonna take a while ....</div>
+			<div class="uploadStatus">Take a little break and come back later!</div>
+			<div class="uploadStatus">Credits: Jonathan Wallasch, David Ott, Felix Nowak</div>
+			<div id="statusBarUpload0"></div>
+			<button class="secondary" onclick="window.location.reload();">Cancel</button>
+		</div>
+	</div>
+	</div>
+
+
+
+	<div id="downloadStatusPopupCon" class="popupCon">
+		<div id="downloadStatusPopup" class="popup">
+			<h2 class="smallPopupHeading">Downloading.</h2>
+			<div class="downloadStatus">We're downloading the requested file.</div>
+			<div class="downloadStatus">Don't close the gigaDrive Application</div>
+			<div class="downloadStatus">Just a sec ...</div>
+			<div id="statusBarDownload0"></div>
+			<button class="secondary" onclick="window.location.reload();">Cancel</button>
+		</div>
+	</div>
+	</div>
+	</div>
+
+	<div id="successDownloadPopupCon" class="popupCon">
+		<div id="successDownload" class="popup">
+			<h2 class="smallPopupHeading">Success!</h2>
+			<div class="downloadSuccess">Download completed.</div>
+			<button class="secondary" title="reload page"
+				onclick="document.getElementById('successDownloadPopupCon').style.display = 'none'">Done</button>
+		</div>
+	</div>
+	</div>
+
+	<div id="successUploadPopupCon" class="popupCon">
+		<div id="successUpload" class="popup">
+			<h2 class="smallPopupHeading">Success!</h2>
+			<div class="uploadSuccess">Upload completed.</div>
+			<button class="secondary"
+				onclick="document.getElementById('successUploadPopupCon').style.display = 'none'">Done</button>
+		</div>
+	</div>
+	</div>
+
+
+		<!--sharePopup-->
+	<!--hidden-->
+	<div id="shareTwoPopupCon" class="popupCon">
+		<div id="shareTwoPopup" class="popup">
+			<h2>Share this workspace</h2>
+			<div class="breaker"></div>
+			<p style="text-align: center; color: lightgray;">Generate links to collaborate with others.<br><br>They'll be logged in instantly.</p>
+
+			<div class="primarySecondaryContainer">
+				<button class="secondary">Start</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<!--sharePopup-->
+	<!--hidden-->
+	<div id="shareTwoPopupCon" class="popupCon">
+		<div id="shareTwoPopup" class="popup">
+			<h2>Share this workspace</h2>
+			<div class="breaker"></div>
+			<p id="confirmPassword"></p>
+			<input type="password" class="confirmPassword" id="confirmPasswordInput" autofocus>
+
+			<div class="primarySecondaryContainer">
+				<button class="secondary">Generate</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+
+	<!--sharePopup-->
+	<!--hidden-->
+	<div id="shareTwoPopupCon" class="popupCon">
+		<div id="shareTwoPopup" class="popup">
+			<h2>Share this workspace</h2>
+			<div class="breaker"></div>
+			<p>Link copied to clipboard.</p>
+			<p style="font-size: .9rem; text-align: center; color: lightpink;">WARNING: people with this link can add, edit and remove files in this workspace. Keep it secret and only share it with people you trust.
+				<br><br>They only lose access if the account password is changed.</p>
+				<p style="color: grey; font-size: .6rem; letter-spacing: -1px; text-align: center; line-height: 1rem;">Please note that we CANNOT guarantee the link's security as it only has standard encryption. This feature is designed to give people instant access via link. To be save, just share your workspace password.</p>
+			<div class="primarySecondaryContainer">
+				<button class="secondary">Done</button>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<script>
+		document.addEventListener("DOMContentLoaded", function () {
+			// Element references
+			const uploadStatus = document.getElementById("uploadStatusPopupCon");
+			const uploadMenu = document.getElementById("uploadPopupCon");
+			const h1 = document.getElementById("h1");
+			const uploadLink = document.getElementById("uploadLink");
+			const homeLink = document.getElementById("homeLink");
+			const shareMenu = document.getElementById("sharePopupCon");
+			const shareLink = document.getElementById("shareLink");
+			const settingsLink = document.getElementById("settingsLink");
+			const settingsMenu = document.getElementById("settingsPopupCon");
+			const statusMenu = document.getElementById("diskPopupCon");
+			const statusLink = document.getElementById("diskSpace");
+			const deletePopupCon = document.getElementById("deletePopupCon");
+			const reloadButton = document.getElementById("reload");
+			const cancelButtons = document.querySelectorAll(".cancelDeleteBtn");
+			const confirmPassword = document.getElementById("confirmPassword");
+			const shareOnePopup = document.getElementById("shareOnePopupCon");
+			const shareTwoPopup = document.getElementById("shareTwoPopupCon");
+			const shareThreePopup = document.getElementById("shareThreePopupCon");
+
+			function openUploadStatusMenu() {
+				uploadMenu.style.display = "none";
+				uploadStatus.style.display = "flex";
+				uploadStatus.classList.add("active");
+				uploadStatus.classList.remove("active");
+			}
+			// Open upload menu
+			function openUploadMenu() {
+				uploadMenu.style.display = "flex";
+				h1.style.filter = "blur(1px)";
+				uploadLink.classList.add("active");
+				homeLink.classList.remove("active");
+				document.title = "Upload | gigaDrive";
+			}
+
+
+			// Open share menu
+			function openShareMenu() {
+				shareMenu.style.display = shareMenu.style.display === "flex" ? "none" : "flex";
+				h1.style.filter = "blur(1px)";
+				shareLink.classList.add("active");
+				homeLink.classList.remove("active");
+				document.title = "Upload | gigaDrive";
+			}
+
+			// Open status menu
+			function openStatusMenu() {
+				statusMenu.style.display = "flex";
+				h1.style.filter = "blur(1px)";
+				statusLink.classList.add("active");
+				homeLink.classList.remove("active");
+				document.title = "Storage | gigaDrive";
+				updateUsedSpace();
+			}
+
+			// Open settings menu
+			function openSettingsMenu() {
+				settingsMenu.style.display = "flex";
+				h1.style.filter = "blur(1px)";
+				settingsLink.classList.add("active");
+				homeLink.classList.remove("active");
+				document.title = "Settings | gigaDrive";
+				document.getElementById("popupSettingsUsername").innerHTML = userr;
+			}
+
+			// Open delete popup
+			function openDeletePopup() {
+				deletePopupCon.style.display = "flex";
+				h1.style.filter = "blur(1px)";
+				document.title = "Delete permanently? | gigaDrive";
+			}
+
+			// Close all popups when canceled
+			function cancelFunction() {
+				const popups = document.querySelectorAll(".popupCon");
+				popups.forEach((popupCon) => {
+					popupCon.style.display = "none";
+				});
+				document.title = "Home | gigaDrive";
+				h1.style.filter = "none";
+			}
+
+			// Reload the page
+			function reloadPage() {
+				location.reload();
+			}
+
+			// Attach event listeners
+			if (uploadLink) uploadLink.addEventListener("click", openUploadMenu);
+			if (shareLink) shareLink.addEventListener("click", openShareMenu);
+			if (statusLink) statusLink.addEventListener("click", openStatusMenu);
+			if (settingsLink) settingsLink.addEventListener("click", openSettingsMenu);
+			if (reloadButton) reloadButton.addEventListener("click", reloadPage);
+			if (document.getElementById("zuck")) document.getElementById("zuck").addEventListener("click", openUploadStatusMenu);
+			document.getElementById("uploadNow").addEventListener("click", openUploadStatusMenu);
+
+			cancelButtons.forEach((button) => button.addEventListener("click", cancelFunction));
+
+			// Add click event listeners to all elements with the class 'fileEdit'
+			const fileEditElements = document.querySelectorAll('.fileEdit');
+			fileEditElements.forEach((element) => {
+				element.addEventListener("click", openUploadMenu);
+			});
+
+			// Cycle statuses for upload
+			const statuses = document.querySelectorAll(".uploadStatus");
+			let currentIndex = 0;
+
+			function showNextStatus() {
+				statuses[currentIndex].classList.remove("activeUploadStatus");
+				currentIndex = (currentIndex + 1) % statuses.length;
+				statuses[currentIndex].classList.add("activeUploadStatus");
+			}
+
+			function cycleStatuses() {
+				if (statuses.length > 0) {
+					statuses[currentIndex].classList.add("activeUploadStatus");
+					setInterval(showNextStatus, 10000);
+				}
+			}
+
+			cycleStatuses();
+
+			// Cycle statuses for download
+			const downloadStatuses = document.querySelectorAll(".downloadStatus");
+			let downloadIndex = 0;
+
+			function showNextDownloadStatus() {
+				downloadStatuses[downloadIndex].classList.remove("activeDownloadStatus");
+				downloadIndex = (downloadIndex + 1) % downloadStatuses.length;
+				downloadStatuses[downloadIndex].classList.add("activeDownloadStatus");
+			}
+
+			function cycleDownloadStatuses() {
+				if (downloadStatuses.length > 0) {
+					downloadStatuses[downloadIndex].classList.add("activeDownloadStatus");
+					setInterval(showNextDownloadStatus, 10000);
+				}
+			}
+
+			cycleDownloadStatuses();
+		});
+//link creation windows code
+		function openShareDialogs() {
+			shareOnePopup.style.display = "flex";
+			shareTwoPopup.style.display = "flex";
+			shareThreePopup.style.display = "flex";
+			document.title = "Share | gigaDrive";
+		}
+
+
+
+// link creation insert username
+
+		function insertUsername() {
+			confirmPassword.innerHTML = "Confirm that it's you, " + userr + ".";
+		}
+		insertUsername();
+
+	</script>
+
+</body>
+
+</html>
+
+
+
+<!--
+TODO
+- upload counter -> into button
+- if upload = 0 -> button is disabled 
+-->

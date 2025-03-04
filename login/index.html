@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | gigaDrive</title>
+    <script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
+    <script type="text/javascript" src="login.js"></script>
+    <link id="stylesheet" rel="stylesheet" href="styles.css">
+<script>
+    function updateStylesheet() {
+        const stylesheet = document.getElementById("stylesheet");
+        if (window.innerWidth <= 768) {
+            stylesheet.href = "mobile.css";
+        } else {
+            stylesheet.href = "styles.css";
+        }
+    }
+
+    // Initial check
+    updateStylesheet();
+
+    // Update on window resize
+    window.addEventListener("resize", updateStylesheet);
+</script>
+
+</head>
+<body>
+<div class="app">
+  <header>
+    <img src="icons8-cloud.png" alt="gigaDrive logo">
+    <h1 onclick="location.reload();" style="user-select: none; cursor: crosshair;">gigaDrive</h1>
+    <p>Free Online Drive Storage</p>
+    <a href="https://github.com/MultimeterManiac/gigaDrive" target="_blank" style="cursor: alias;">Source Code</a>
+  </header>
+
+  <main class="active" id="signIn">
+    <nav>
+      <div onclick="tSIA()" style="background-color: var(--secondary);">Log In</div>
+      <div onclick="tSUA()">Sign Up</div>
+    </nav>
+    <article id="inputList">
+      <input placeholder="username" type="text" id="userName" autofocus>
+      <input placeholder="password" type="password" id="password">
+      <div id="authStatus" style="display: none;"></div>
+      <button onclick="login()">Login</button>
+    </article>
+  </main>
+
+<main id="signUp">
+  <nav>
+    <div onclick="tSIA()">Log In</div>
+    <div onclick="tSUA()" style="background-color: var(--secondary);">Sign Up</div>
+  </nav>
+  <article id="signupPopup">
+    <input placeholder="account username" id="1"></input>
+    <input placeholder="account password" id="2" type="password"></input>
+    <button onclick="signup()">Signup</button>
+  </article>
+</main>
+<footer>
+  <p class="mobileonly">Free Online Drive Storage</p>
+  <a class="mobileonly" href="https://github.com/MultimeterManiac/gigaDrive" target="_blank">Source Code</a>
+  <a href="https://icons8.com" target="_blank">Icons by Icons8</a>
+  <a style="cursor: alias;" href="https://gigadrive.ddns.net/thisfeatureisindevelopment">Log in without account</a>
+</footer>
+
+</div>
+
+<script>
+  let signIn = document.getElementById("signIn");
+  let signUp = document.getElementById("signUp");
+    function tSIA() { // when user clicks on sign in, its class will be toggled.
+      signIn.classList.add("active");
+      signUp.classList.remove("active");
+    }
+
+    function tSUA() { // when user clicks on sign up, its class will be toggled.
+      signIn.classList.remove("active");
+      signUp.classList.add("active");
+    }
+</script>
+
+</body>
+</html>
