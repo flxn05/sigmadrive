@@ -2,7 +2,7 @@
   "name": "gigaDrive",
   "short_name": "gigaDrive",
   "description": "A online storage application",
-  "start_url": "/gigadrive",
+  "start_url": "/sigmadrive",
   "display": "standalone",
   "background_color": "#2e2e2e",
   "theme_color": "#12b886",
