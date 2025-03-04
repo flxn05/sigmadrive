@@ -25,15 +25,12 @@
 		updateStylesheet();
 		window.addEventListener("resize", updateStylesheet);
 
-		setTimeout(function() {
-    document.getElementById('start').style.display = 'none';
-}, 1000);
-
+		
 	</script>
 </head>
 
 <body>
-		<div class="start" id="start">
+		<div class="start">
 		<div>verifying...</div>
 	</div>
 	<h1 id="h1">gigaDrive</h1>
@@ -118,15 +115,17 @@
 		<div id="uploadPopup" class="popup">
 			<img src="upload.png" class="popupIcon">
 			<h2>Upload</h2>
-			<div class="breaker"></div>
+			<div class="breaker" style="margin: 0;"></div>
 
 			<p id="fffi" class="exclude"></p>
 
 
 			<!--select Name, Access-->
 			<section class="uploadSectionUpload">
-				<label for="addFile" class="droppingNotActive">
+				<div class="labelCon">
+				<label for="addFile" class="droppin" style="font-size: 2rem; color: var(--fileFocus);">+
 				</label>
+				</div>
 				<input type="file" id="addFile" style="opacity: 0; scale: 0;" multiple>
 				<div class="primarySecondaryContainer buttons">
 					<div onclick="filter('red')" class="filesFilter">

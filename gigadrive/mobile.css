@@ -64,8 +64,14 @@ body {
     opacity: 1;
   }
 
+  99% {
+    height: 100vh;
+    width: 100vw;
+  }
   100% {
     opacity: 0;
+    height: 0;
+    width: 0;
   }
 }
 
@@ -339,13 +345,26 @@ h4 {
   width: 2rem;
 }
 
+.labelCon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 #uploadPopupCon label {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16vh;
+  width: 100%;
   cursor: cell;
+  transition: all .1s ease;
+  border-radius: 10px;
+  background-color: var(--primary);
+}
+
+#uploadPopupCon label:hover {
+  background-color: #373d39;
 }
 
 #uploadPopupCon .dropping {
