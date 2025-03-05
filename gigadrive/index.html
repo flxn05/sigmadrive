@@ -5,7 +5,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js" integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
+		integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
 	<script src="webszite4.js" defer></script>
 	<script src="client.js"></script>
 	<title>Home | gigaDrive</title>
@@ -25,12 +26,12 @@
 		updateStylesheet();
 		window.addEventListener("resize", updateStylesheet);
 
-		
+
 	</script>
 </head>
 
 <body>
-		<div class="start">
+	<div class="start">
 		<div>verifying...</div>
 	</div>
 	<h1 id="h1">gigaDrive</h1>
@@ -38,47 +39,30 @@
 	</section>
 	<div class="spacer"></div>
 	<section id="fileArea">
+		<div class="searchCon">
+
+			<input type="text" id="search" placeholder="Search for files" autocomplete="off" spellcheck="false" >
+		</div>
 		<!--appear when long pressed or selection
 		<div class="filesFilterCon">
 			<div onclick="" class="filesFilterFilter">[LOAD]</div>
 			<div onclick="" class="filesFilterFilter">[ZIPLOAD]</div>
-			<div onclick="" class="filesFilterFilter">[CANCEL]</div>
+			<div onclick="" class="filesFilterFilter">[CANCEL], remove</div>
 		-->
 		</div>
 		<div class="headFiles">
 			<div class="filesFilterCon">
 				<div onclick="" class="filesFilterFilter">SELECT</div>
-				<div onclick="clearFilter()" class="filesFilterFilter">ALL</div>
+				<div onclick="clearFilter()" class="filesFilter"
+					style="background-image: linear-gradient(135deg, var(--primary), var(--primary), var(--accenthalf), var(--fileFocus)); filter: brightness(1.5);">
+					ALL</div>
 
-				<div onclick="filter('red')" class="filesFilter">
-					<div class="filesFilterColor" style="background-color: var(--red);"></div>
-					<div class="filesFilterName">Red</div>
-				</div><!--filter-->
-
-				<div onclick="filter('green')" class="filesFilter">
-					<div class="filesFilterColor" style="background-color: var(--green);"></div>
-					<div class="filesFilterName">Green</div>
-				</div><!--filter-->
-
-				<div onclick="filter('yellow')" class="filesFilter">
-					<div class="filesFilterColor" style="background-color: var(--yellow);"></div>
-					<div class="filesFilterName">Yellow</div>
-				</div><!--filter-->
-
-				<div onclick="filter('blue')" class="filesFilter">
-					<div class="filesFilterColor" style="background-color: var(--blue);"></div>
-					<div class="filesFilterName">Blue</div>
-				</div><!--filter-->
-
-				<div onclick="filter('purple')" class="filesFilter">
-					<div class="filesFilterColor" style="background-color: var(--purple);"></div>
-					<div class="filesFilterName">Purple</div>
-				</div><!--filter-->
-
-				<div onclick="filter('white')" class="filesFilter">
-					<div class="filesFilterColor" style="background-color: var(--white);"></div>
-					<div class="filesFilterName">White</div>
-				</div><!--filter-->
+				<div onclick="filter('red')" class="filesFilter" style="background-color: var(--red);"></div>
+				<div onclick="filter('green')" class="filesFilter" style="background-color: var(--green);"></div>
+				<div onclick="filter('yellow')" class="filesFilter" style="background-color: var(--yellow);"></div>
+				<div onclick="filter('blue')" class="filesFilter" style="background-color: var(--blue);"></div>
+				<div onclick="filter('purple')" class="filesFilter" style="background-color: var(--purple);"></div>
+				<div onclick="filter('white')" class="filesFilter" style="background-color: var(--white);"></div>
 
 			</div> <!--filterfilter-->
 		</div>
@@ -123,41 +107,20 @@
 			<!--select Name, Access-->
 			<section class="uploadSectionUpload">
 				<div class="labelCon">
-				<label for="addFile" class="droppin" style="font-size: 2rem; color: var(--fileFocus);">+
-				</label>
+					<label for="addFile" class="droppin" style="font-size: 2rem; color: var(--fileFocus);">+
+					</label>
 				</div>
 				<input type="file" id="addFile" style="opacity: 0; scale: 0;" multiple>
+				<div style="width: 100%; display: flex; justify-content: center;"><!--open container-->
 				<div class="primarySecondaryContainer buttons">
-					<div onclick="filter('red')" class="filesFilter">
-						<div class="filesFilterColor" style="background-color: var(--red);"></div>
-						<div class="filesFilterName">Red</div>
-					</div><!--filter-->
-
-					<div onclick="filter('green')" class="filesFilter">
-						<div class="filesFilterColor" style="background-color: var(--green);"></div>
-						<div class="filesFilterName">Green</div>
-					</div><!--filter-->
-
-					<div onclick="filter('yellow')" class="filesFilter">
-						<div class="filesFilterColor" style="background-color: var(--yellow);"></div>
-						<div class="filesFilterName">Yellow</div>
-					</div><!--filter-->
-
-					<div onclick="filter('blue')" class="filesFilter">
-						<div class="filesFilterColor" style="background-color: var(--blue);"></div>
-						<div class="filesFilterName">Blue</div>
-					</div><!--filter-->
-
-					<div onclick="filter('purple')" class="filesFilter">
-						<div class="filesFilterColor" style="background-color: var(--purple);"></div>
-						<div class="filesFilterName">Purple</div>
-					</div><!--filter-->
-
-					<div onclick="filter('white')" class="filesFilter">
-						<div class="filesFilterColor" style="background-color: var(--white);"></div>
-						<div class="filesFilterName">White</div>
-					</div><!--filter-->
+					<div onclick="filter('red')" class="filesFilter" style="background-color: var(--red);"></div>
+					<div onclick="filter('green')" class="filesFilter" style="background-color: var(--green);"></div>
+					<div onclick="filter('yellow')" class="filesFilter" style="background-color: var(--yellow);"></div>
+					<div onclick="filter('blue')" class="filesFilter" style="background-color: var(--blue);"></div>
+					<div onclick="filter('purple')" class="filesFilter" style="background-color: var(--purple);"></div>
+					<div onclick="filter('white')" class="filesFilter" style="background-color: var(--white);"></div>
 				</div>
+				</div><!--close container-->
 				<input type="text" id="tag" placeholder="Tags" style="color: black;" class="inputField">
 				<div class="primarySecondaryContainer">
 					<button class="secondary" onclick="
@@ -301,13 +264,14 @@
 	</div>
 
 
-		<!--sharePopup-->
+	<!--sharePopup-->
 	<!--hidden-->
 	<div id="shareTwoPopupCon" class="popupCon">
 		<div id="shareTwoPopup" class="popup">
 			<h2>Share this workspace</h2>
 			<div class="breaker"></div>
-			<p style="text-align: center; color: lightgray;">Generate links to collaborate with others.<br><br>They'll be logged in instantly.</p>
+			<p style="text-align: center; color: lightgray;">Generate links to collaborate with others.<br><br>They'll be
+				logged in instantly.</p>
 
 			<div class="primarySecondaryContainer">
 				<button class="secondary">Start</button>
@@ -340,9 +304,13 @@
 			<h2>Share this workspace</h2>
 			<div class="breaker"></div>
 			<p>Link copied to clipboard.</p>
-			<p style="font-size: .9rem; text-align: center; color: lightpink;">WARNING: people with this link can add, edit and remove files in this workspace. Keep it secret and only share it with people you trust.
-				<br><br>They only lose access if the account password is changed.</p>
-				<p style="color: grey; font-size: .6rem; letter-spacing: -1px; text-align: center; line-height: 1rem;">Please note that we CANNOT guarantee the link's security as it only has standard encryption. This feature is designed to give people instant access via link. To be save, just share your workspace password.</p>
+			<p style="font-size: .9rem; text-align: center; color: lightpink;">WARNING: people with this link can add, edit
+				and remove files in this workspace. Keep it secret and only share it with people you trust.
+				<br><br>They only lose access if the account password is changed.
+			</p>
+			<p style="color: grey; font-size: .6rem; letter-spacing: -1px; text-align: center; line-height: 1rem;">Please note
+				that we CANNOT guarantee the link's security as it only has standard encryption. This feature is designed to
+				give people instant access via link. To be save, just share your workspace password.</p>
 			<div class="primarySecondaryContainer">
 				<button class="secondary">Done</button>
 			</div>
@@ -387,16 +355,6 @@
 				document.title = "Upload | gigaDrive";
 			}
 
-
-			// Open share menu
-			function openShareMenu() {
-				shareMenu.style.display = shareMenu.style.display === "flex" ? "none" : "flex";
-				h1.style.filter = "blur(1px)";
-				shareLink.classList.add("active");
-				homeLink.classList.remove("active");
-				document.title = "Upload | gigaDrive";
-			}
-
 			// Open status menu
 			function openStatusMenu() {
 				statusMenu.style.display = "flex";
@@ -415,13 +373,6 @@
 				homeLink.classList.remove("active");
 				document.title = "Settings | gigaDrive";
 				document.getElementById("popupSettingsUsername").innerHTML = userr;
-			}
-
-			// Open delete popup
-			function openDeletePopup() {
-				deletePopupCon.style.display = "flex";
-				h1.style.filter = "blur(1px)";
-				document.title = "Delete permanently? | gigaDrive";
 			}
 
 			// Close all popups when canceled
@@ -494,7 +445,7 @@
 
 			cycleDownloadStatuses();
 		});
-//link creation windows code
+		//link creation windows code
 		function openShareDialogs() {
 			shareOnePopup.style.display = "flex";
 			shareTwoPopup.style.display = "flex";
@@ -504,12 +455,60 @@
 
 
 
-// link creation insert username
+		// link creation insert username
 
 		function insertUsername() {
 			confirmPassword.innerHTML = "Confirm that it's you, " + userr + ".";
 		}
 		insertUsername();
+
+		//pls fix @ joni
+
+		document.addEventListener("DOMContentLoaded", function () {
+    const searchInput = document.querySelector("#search");
+    const fileList = document.querySelector("#fileList");
+    const fileLinks = document.querySelectorAll(".fileLink");
+    
+    const noResultsMessage = document.createElement("div");
+    noResultsMessage.textContent = "No matches found.";
+    noResultsMessage.style.display = "none";
+    noResultsMessage.style.color = "red";
+    fileList.appendChild(noResultsMessage);
+    
+    searchInput.addEventListener("input", function () {
+			console.log("searching");
+        const query = searchInput.value.toLowerCase();
+        let matchFound = false;
+
+        if (query !== "") {
+            searchInput.style.width = "92vw";
+            searchInput.style.height = "3rem";
+        } else {
+            searchInput.style.width = "";
+            searchInput.style.height = "";
+        }
+
+        fileLinks.forEach(link => {
+            if (link.textContent.toLowerCase().includes(query)) {
+                link.classList.remove("noMatch");
+                link.style.display = "";
+                matchFound = true;
+            } else {
+                link.classList.add("noMatch");
+                setTimeout(() => {
+                    link.classList.remove("noMatch");
+                    link.style.display = "none";
+                }, 1000);
+            }
+        });
+
+        noResultsMessage.style.display = matchFound ? "none" : "block";
+    });
+});
+
+
+
+
 
 	</script>
 
@@ -523,4 +522,7 @@
 TODO
 - upload counter -> into button
 - if upload = 0 -> button is disabled 
+if #search value is empty -> normal size + --accenthalf
+if #search value is not empty -> bigger size + bg color --fileFocus // class add, transition
+
 -->

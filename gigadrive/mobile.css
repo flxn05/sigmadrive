@@ -9,11 +9,11 @@
   --radius: 12px;
   --margin: 2px;
   --white: #e6e6e6;
-  --green: #12b886;
-  --blue: #2c64b9;
-  --red: #ad3131;
-  --yellow: #caca29;
-  --purple: #af00af;
+  --green: #158563;
+  --blue: #0851b1;
+  --red: #ad2424;
+  --yellow: #a3a340;
+  --purple: #7a007a;
 }
 
 ::selection {
@@ -68,6 +68,7 @@ body {
     height: 100vh;
     width: 100vw;
   }
+
   100% {
     opacity: 0;
     height: 0;
@@ -183,6 +184,7 @@ h4 {
   grid-template-columns: auto 1fr;
   justify-content: center;
   align-items: center;
+  margin-bottom: 24px;
 }
 
 .filesFilterCon {
@@ -197,25 +199,51 @@ h4 {
 }
 
 .filesFilter {
-  font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: 1px;
-  font-size: .75rem;
   margin-inline: 4px;
-  background-color: #8080805e;
-  padding: 3px;
-  padding-inline: 6px;
-  border-radius: 4px;
-  display: grid;
-  grid-template-columns: 12px auto;
+  height: 1.2rem;
+  width: 1.6rem;
+  border-radius: var(--radius);
+  background-color: var(--fileFocus);
+  font-family: monospace;
+  box-shadow: 4px 0 8px rgba(0, 0, 0, 0.253);
+  font-size: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.filesFilterFilter:hover {
-  filter: brightness(2);
+.searchCon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search {
+  background-color: var(--accenthalf);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--accent);
+  padding-block: 4px;
+  padding-inline: 12px;
+  font-style: italic;
+  width: 72vw;
+  margin-bottom: 12px;
+}
+::placeholder {
+  color: var(--accent);
+  text-align: center;
+  font-style: italic;
+}
+
+.noMatch {
+  opacity: .5;
 }
 
 .buttons {
-  display: grid !important;
-  grid-template-columns: 1fr 1fr 1fr;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 66vw;
 }
 
 .buttons>div {
@@ -257,8 +285,11 @@ h4 {
   border-radius: 4px;
   background-color: var(--fileFocus);
 }
-
-
+.filesFilterFilter img {
+  height: .9rem;
+  width: .9rem;
+  margin: 0;
+}
 
 .fileLink:hover {
   border: green 1px solid;
