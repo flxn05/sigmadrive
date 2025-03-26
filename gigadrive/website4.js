@@ -43,17 +43,35 @@ elements.forEach(element => {
 
 async function listFiles() {
 
-	let files = await list_files("/" + userr);
+	//let files = await list_files("/" + userr);
 	//console.log(files);
-	files = JSON.parse(files);
-	/*files = [
+	//files = JSON.parse(files);
+	files = [
+		"/user/purple/file1.txt",
+		"/user/red/file2.txt",
+		"/user/blue/file3.txt",
+		"/user/green/file4.txt",
+		"/user/yellow/file5.txt",
+		"/user/white/file6.txt",
+		"/user/purple/file1.txt",
+		"/user/red/file2.txt",
+		"/user/blue/file3.txt",
+		"/user/green/file4.txt",
+		"/user/yellow/file5.txt",
+		"/user/white/file6.txt",
+		"/user/purple/file1.txt",
+		"/user/red/file2.txt",
+		"/user/blue/file3.txt",
+		"/user/green/file4.txt",
+		"/user/yellow/file5.txt",
+		"/user/white/file6.txt",
 		"/user/purple/file1.txt",
 		"/user/red/file2.txt",
 		"/user/blue/file3.txt",
 		"/user/green/file4.txt",
 		"/user/yellow/file5.txt",
 		"/user/white/file6.txt"
-	];*/
+	];
 	let par = document.getElementById("fileList");
 
 	while (par.lastChild) {
@@ -232,5 +250,24 @@ function getLink(pswd){
 	console.log(link);
 }
 
+document.getElementById("search").addEventListener("input", function() {
 
+	let searchQuery = this.value.toLowerCase();
+	console.log(searchQuery);
+	let ll = document.querySelectorAll('.fileLink');
+	console.log(ll);
 
+	ll.forEach(function(contact) {
+			let contactName = contact.textContent.toLowerCase();
+			if (contactName.includes(searchQuery)) {
+					contact.classList.remove('hiddenResult');
+					contact.classList.remove('displayNone');
+			} else {
+					contact.classList.add('hiddenResult');
+					setTimeout(function() {
+							contact.classList.add('displayNone');
+					}, 400);
+			}
+	});
+
+});

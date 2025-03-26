@@ -151,7 +151,7 @@
 				<p style="text-align: center;">version</p>
 				<p style="font-size: .9rem; color: grey; text-align: center; line-height: 1rem;"> 2.4 (development)</p>
 				<p style="font-size: .9rem; color: grey; text-align: center; line-height: 1rem;">Update: link sharing, Tags</p>
-				<div style="text-align: center;" class="shareLink"  class="shareLink">share this workspace</div>
+				<p style="text-align: center;" class="shareLink">share this workspace</p>
 				<!--development, beta, public-->
 				<div style="display: flex; justify-content: center; margin-top: 2rem;">
 					<button class="secondary" onclick="
@@ -266,8 +266,8 @@
 
 	<!--sharePopup-->
 	<!--hidden-->
-	<div id="shareOnePopupCon" class="popupCon" style="display: fex;">
-		<div id="shareOnePopup" class="popup">
+	<div id="shareTwoPopupCon" class="popupCon">
+		<div id="shareTwoPopup" class="popup">
 			<h2>Share this workspace</h2>
 			<div class="breaker"></div>
 			<p style="text-align: center; color: lightgray;">Generate links to collaborate with others.<br><br>They'll be
@@ -299,8 +299,8 @@
 
 	<!--sharePopup-->
 	<!--hidden-->
-	<div id="shareThreePopupCon" class="popupCon">
-		<div id="shareThreePopup" class="popup">
+	<div id="shareTwoPopupCon" class="popupCon">
+		<div id="shareTwoPopup" class="popup">
 			<h2>Share this workspace</h2>
 			<div class="breaker"></div>
 			<p>Link copied to clipboard.</p>
@@ -392,7 +392,7 @@
 
 			// Attach event listeners
 			if (uploadLink) uploadLink.addEventListener("click", openUploadMenu);
-			if (shareLink) shareLink.addEventListener("click", openShareDialogs);
+			if (shareLink) shareLink.addEventListener("click", openShareMenu);
 			if (statusLink) statusLink.addEventListener("click", openStatusMenu);
 			if (settingsLink) settingsLink.addEventListener("click", openSettingsMenu);
 			if (reloadButton) reloadButton.addEventListener("click", reloadPage);
@@ -447,8 +447,7 @@
 		});
 		//link creation windows code
 		function openShareDialogs() {
-			console.log('ichfickdeinemudda')
-			shareOnePopup.style.display = "block";
+			shareOnePopup.style.display = "flex";
 			shareTwoPopup.style.display = "flex";
 			shareThreePopup.style.display = "flex";
 			document.title = "Share | gigaDrive";
