@@ -25,13 +25,13 @@
       "type": "image/png"
     },
     {
-      "src": "gigaDrive.png",
+      "src": "icon.png",
       "sizes": "512x512",
       "type": "image/png"
     },
 
     {
-      "src": "gigaDrive.png",
+      "src": "icon.png",
       "sizes": "256x256px",
       "type": "image/png"
     },
