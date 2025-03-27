@@ -64,6 +64,7 @@ body {
     height: 100vh;
     width: 100vw;
   }
+
   100% {
     opacity: 0;
     height: 0;
@@ -107,9 +108,12 @@ body {
 }
 
 h1 {
-  font-size: 3.2rem;
+  font-size: 1.66rem;
   text-align: center;
   color: white;
+  position: fixed;
+  top: 24px;
+  left: 36px;
 }
 
 h2 {
@@ -147,6 +151,7 @@ h4 {
   grid-template-columns: 1fr 1fr 1fr;
   width: calc(100vw-4rem-36px);
   row-gap: .75rem;
+  padding-bottom: 25vh;
 }
 
 .fileLink {
@@ -156,7 +161,7 @@ h4 {
   border-radius: var(--radius);
   margin: var(--margin);
   padding: .75rem;
-  animation: fileFade .75s ease both;
+  animation: fileFade .5s ease both;
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
   cursor: pointer;
@@ -178,6 +183,10 @@ h4 {
   grid-template-columns: auto 1fr;
   justify-content: center;
   align-items: center;
+}
+.filesFilter:focus,
+.filesFilter:focus-visible {
+  outline: none !important;
 }
 
 .filesFilterCon {
@@ -222,14 +231,17 @@ h4 {
   width: 512px;
   margin-bottom: 12px;
 }
+
 ::placeholder {
   color: var(--accent);
   text-align: center;
   font-style: italic;
 }
+
 #search:focus {
   outline: none;
 }
+
 .filesFilterFilter:hover {
   filter: brightness(2);
 }
@@ -951,10 +963,20 @@ select {
 }
 
 @keyframes fileFade {
-  0% {
-    opacity: .1;
-    filter: saturate(0);
-  }
+    100% {
+      scale: 1;
+    }
+  
+    1% {
+      scale: .8;
+      opacity: 0;
+      translate: 6vw -24px;
+      filter: blur(2px);
+    }
+  
+    0% {
+      scale: 0;
+    }
 }
 
 @keyframes dropZone {
@@ -967,11 +989,24 @@ select {
 .hiddenResult {
   animation: hiddenSearch .5s ease both;
 }
+
 @keyframes hiddenSearch {
-  0% {scale: 1;}
-  99% {scale: .8; opacity: 0; translate: 6vw -24px; filter: blur(2px);}
-  100% {scale: 0;}
+  0% {
+    scale: 1;
+  }
+
+  99% {
+    scale: .8;
+    opacity: 0;
+    translate: 6vw -24px;
+    filter: blur(2px);
+  }
+
+  100% {
+    scale: 0;
+  }
 }
+
 .displayNone,
 .hidden {
   display: none;
@@ -1068,4 +1103,38 @@ select {
   100% {
     background-color: var(--accenthalf);
   }
+}
+
+
+.selecting {
+  animation: selectingNow 1s .5s ease both;
+}
+@keyframes selectingNow {
+  0% {transform: scale(1);}
+  33% {transform: scale(.85); box-shadow: 6px 6px 12px var(--popup);}
+  100% {translate: 28px; transform: scale(.85); box-shadow: 6px 6px 12px var(--popup);}
+}
+
+.selected {
+  animation: selectedNow 3s ease both infinite;
+}
+
+@keyframes selectedNow {
+  0% {background-color: var(--fileFocus)}
+  50% {background-color: var(--accenthalf);}
+  100% {background-color: var(--fileFocus)}
+}
+
+#selectInfo {
+  display: none;
+  font-size: .75rem;
+  font-style: italic;
+  color: var(--secondary);
+  text-align: center;
+  margin-block: 1rem;
+  animation: selectInfoStart .5s ease both;
+}
+@keyframes selectInfoStart {
+  0% {opacity: 0; height: 0;}
+  100% {opacity: 1; height: auto;}
 }

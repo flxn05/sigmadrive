@@ -7,13 +7,12 @@
 	<script src="https://cdn.jsdelivr.net/npm/appwrite@16.0.2"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"
 		integrity="sha256-/H4YS+7aYb9kJ5OKhFYPUjSJdrtV6AeyJOtTkw6X72o=" crossorigin="anonymous"></script>
-	<script src="website4.js" defer></script> 
+	<script src="website4.js" defer></script>
 	<script src="client.js"></script>
 	<title>Home | gigaDrive</title>
 	<link id="stylesheet" rel="stylesheet" href="styles.css">
-	<link rel="icon" type="image/x-icon" href="icon.png">
+	<link rel="icon" type="image/x-icon" href="icons8-cloud.png">
 	<link rel="manifest" href="manifest.json">
-	<!---->
 	<script>
 		function updateStylesheet() {
 			const stylesheet = document.getElementById("stylesheet");
@@ -53,7 +52,8 @@
 		</div>
 		<div class="headFiles">
 			<div class="filesFilterCon">
-				<div onclick="" class="filesFilterFilter">SELECT</div>
+				<div onclick="window.location.reload()" class="filesFilterFilter hidden" id="cancelSelectBtn">CANCEL</div>
+				<div onclick="selectMenu()" class="filesFilterFilter" id="selectBtn">SELECT</div>
 				<div onclick="clearFilter()" class="filesFilter"
 					style="background-image: linear-gradient(135deg, var(--primary), var(--primary), var(--accenthalf), var(--fileFocus)); filter: brightness(1.5);">
 					ALL</div>
@@ -67,6 +67,7 @@
 
 			</div> <!--filterfilter-->
 		</div>
+		<div id="selectInfo">Select items by clicking, then choose the actions above.</div>
 		<div id="fileList">
 			<div class="loading">loading your files ...</div>
 			<!--file list here-->

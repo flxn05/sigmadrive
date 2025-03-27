@@ -29,8 +29,8 @@ function msend(msg) {
 }
 
 //sleep(500);
-let socket = new WebSocket("wss://gigachat.ddns.net:12369");
-let socket1 = new WebSocket("wss://gigachat.ddns.net:12368");
+let socket = new WebSocket("wss://gigadrive.ddns.net:12369");
+let socket1 = new WebSocket("wss://gigadrive.ddns.net:12368");
 sleep(500);
 
 async function delete_file(filename) {
@@ -87,9 +87,7 @@ async function make_file(filename) {
 async function sendChunks() {
     console.log("Start sending");
     const fileInput = document.getElementById("addFile");
-    for (i = 0; i < fileInput.files.length; i++) {
-    
-    const file = fileInput.files[i];
+    const file = fileInput.files[0];
     const size = file.size;
     const totalChunks = Math.ceil(size / chunksize);
     _chunks_total_send = totalChunks*_chunks_multiple;
@@ -128,7 +126,6 @@ async function sendChunks() {
 
         currentChunk++;
         _chunks_send++;
-        updateSentChunks();
 
         if (currentChunk < totalChunks) {
             setTimeout(() => readNextChunk(), send_delay);
@@ -146,7 +143,6 @@ async function sendChunks() {
     }
 
     readNextChunk();
-}
 }
 
 async function sigma_counter(){

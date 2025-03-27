@@ -1,8 +1,8 @@
 {
-  "name": "gigaDrive Preview",
-  "short_name": "devGigaDrive",
+  "name": "gigaDrive",
+  "short_name": "gigaDrive",
   "description": "A online storage application",
-  "start_url": "/sigmadrive",
+  "start_url": "/sigmadrive/gigadrive",
   "display": "standalone",
   "background_color": "#2e2e2e",
   "theme_color": "#12b886",

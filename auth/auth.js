@@ -1,14 +1,20 @@
+const encrypt = (text) => {
+    return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
+  };
+  
+  const decrypt = (data) => {
+    return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
+  };
+
+//let link = window.location.href;
+//let e_user = link.split("?")[1].split("&")[0].split("=")[1];
+//let e_pswd = link.split("?")[1].split("&")[1].split("=")[1];
 
 
-let link = window.location.href;
-//link = "https://gigadrive.ddns.net/auth?user=Justus&pswd=12345";
-let e_user = link.split("?")[1].split("&")[0].split("=")[1];
-let e_pswd = link.split("?")[1].split("&")[1].split("=")[1];
 
-let user = CryptoJS.AES.decrypt(e_user, "gaySex69lol_lmao");
-let pswd = CryptoJS.AES.decrypt(e_pswd, "gaySex69lol_lmao");
-console.log(user.toString(CryptoJS.enc.Utf8));
-console.log(pswd.toString(CryptoJS.enc.Utf8));
+
+let user = decrypt(e_user);
+let pswd = decrypt(e_pswd);
 
 async function login(){
     const client = new Appwrite.Client();
@@ -40,5 +46,9 @@ const account = new Appwrite.Account(client);
     
     window.location.replace("https://gigadrive.ddns.net/gigadrive");
 }
+
+
+
+
 
 login();
