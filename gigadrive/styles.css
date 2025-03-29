@@ -3,6 +3,7 @@
   --secondary: #5f5f5f;
   --accent: #12b886;
   --accenthalf: #12b88686;
+  --accentquarter: #12b8865e;
   --popup: #2e2e2e;
   --hover: brightness(1.1);
   --fileFocus: #5f5f5f;
@@ -185,6 +186,7 @@ h4 {
   justify-content: center;
   align-items: center;
 }
+
 .filesFilter:focus,
 .filesFilter:focus-visible {
   outline: none !important;
@@ -221,7 +223,10 @@ h4 {
   align-items: center;
 }
 
-#search {
+#search,
+#userNameInput,
+#passwordInput,
+#generate {
   background-color: var(--accenthalf);
   border: none;
   border-radius: var(--radius);
@@ -231,6 +236,21 @@ h4 {
   font-style: italic;
   width: 512px;
   margin-bottom: 12px;
+}
+
+#userNameInput,
+#passwordInput,
+#generate {
+  display: block;
+  width: 256px;
+  background-color: var(--fileFocus);
+  color: var(--white);
+}
+
+#generate {
+  background-color: var(--accenthalf);
+  color: var(--accent);
+  cursor: crosshair;
 }
 
 ::placeholder {
@@ -964,20 +984,20 @@ select {
 }
 
 @keyframes fileFade {
-    100% {
-      scale: 1;
-    }
-  
-    1% {
-      scale: .8;
-      opacity: 0;
-      translate: 6vw -24px;
-      filter: blur(2px);
-    }
-  
-    0% {
-      scale: 0;
-    }
+  100% {
+    scale: 1;
+  }
+
+  1% {
+    scale: .8;
+    opacity: 0;
+    translate: 6vw -24px;
+    filter: blur(2px);
+  }
+
+  0% {
+    scale: 0;
+  }
 }
 
 @keyframes dropZone {
@@ -1110,10 +1130,22 @@ select {
 .selecting {
   animation: selectingNow 1s .5s ease both;
 }
+
 @keyframes selectingNow {
-  0% {transform: scale(1);}
-  33% {transform: scale(.85); box-shadow: 6px 6px 12px var(--popup);}
-  100% {translate: 28px; transform: scale(.85); box-shadow: 6px 6px 12px var(--popup);}
+  0% {
+    transform: scale(1);
+  }
+
+  33% {
+    transform: scale(.85);
+    box-shadow: 6px 6px 12px var(--popup);
+  }
+
+  100% {
+    translate: 28px;
+    transform: scale(.85);
+    box-shadow: 6px 6px 12px var(--popup);
+  }
 }
 
 .selectedOne {
@@ -1124,8 +1156,16 @@ select {
 }
 
 @keyframes selectedOne {
-  0% {background-color: var(--fileFocus); transform: scale(.85);}
-  100% {background-color: var(--accenthalf); transform: scale(1.025); filter: brightness(1.2);}
+  0% {
+    background-color: var(--fileFocus);
+    transform: scale(.85);
+  }
+
+  100% {
+    background-color: var(--accentquarter);
+    transform: scale(1.025);
+    filter: brightness(1.2);
+  }
 }
 
 .selectedTwo {
@@ -1137,9 +1177,20 @@ select {
 }
 
 @keyframes selectedTwo {
-  0% {background-color: var(--accenthalf)}
-  50% {background-color: var(--accent);}
-  100% {background-color: var(--accenthalf)}
+  0% {
+    background-color: var(--accentquarter);
+    transform: scale(1.025);
+  }
+
+  50% {
+    background-color: var(--accent);
+    transform: scale(1);
+  }
+
+  100% {
+    background-color: var(--accentquarter);
+    transform: scale(1.025);
+  }
 }
 
 #selectInfo {
@@ -1151,7 +1202,15 @@ select {
   margin-block: 1rem;
   animation: selectInfoStart .5s ease both;
 }
+
 @keyframes selectInfoStart {
-  0% {opacity: 0; height: 0;}
-  100% {opacity: 1; height: auto;}
+  0% {
+    opacity: 0;
+    height: 0;
+  }
+
+  100% {
+    opacity: 1;
+    height: auto;
+  }
 }

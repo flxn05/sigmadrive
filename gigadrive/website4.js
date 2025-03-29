@@ -23,7 +23,7 @@ async function check() {
 	}
 }
 
-//check();
+check();
 
 async function logout() {
 	const res = await account.deleteSessions();
@@ -35,10 +35,10 @@ async function logout() {
 const elements = document.querySelectorAll('.filesFilter');
 
 elements.forEach(element => {
-  element.addEventListener('click', () => {
-    elements.forEach(e => e.classList.remove('activeFilter'));
-    element.classList.add('activeFilter');
-  });
+	element.addEventListener('click', () => {
+		elements.forEach(e => e.classList.remove('activeFilter'));
+		element.classList.add('activeFilter');
+	});
 });
 
 async function listFiles() {
@@ -66,7 +66,15 @@ async function listFiles() {
 		"/user/purple/financial_report.csv",
 		"/user/red/meeting_minutes.doc",
 		"/user/green/landscape_photo.jpg",
-		"/user/yellow/blueprint.dwg"
+		"/user/yellow/blueprint.dwg",
+		"/user/purple/randomfile1.docx",
+		"/user/red/notes123.pdf",
+		"/user/green/image_awesome.png",
+		"/user/yellow/script_final.js",
+		"/user/purple/design_mockup.psd",
+		"/user/red/project_plan.xlsx",
+		"/user/green/photo_album.zip",
+		"/user/yellow/music_track.mp3"
 	];
 	let par = document.getElementById("fileList");
 
@@ -120,7 +128,7 @@ async function listFiles() {
 		let el9 = document.createElement("img");
 		el9.setAttribute("src", "delete.png");
 		el5.appendChild(el9);
-		
+
 
 
 
@@ -214,63 +222,66 @@ function filter(tag) {
 function clearFilter() {
 	let childs = document.querySelectorAll(".fileLink");
 	childs.forEach(function (child) {
-		child.classList.remove("hidden")});
-		const elements = document.querySelectorAll('.filesFilter');
-    elements.forEach(function(element) {element.classList.remove('activeFilter');
-    element.classList.remove('activeFilter');});
-	
+		child.classList.remove("hidden")
+	});
+	const elements = document.querySelectorAll('.filesFilter');
+	elements.forEach(function (element) {
+		element.classList.remove('activeFilter');
+		element.classList.remove('activeFilter');
+	});
+
 }
 
 function round(value, precision) {
-    var multiplier = Math.pow(10, precision || 0);
-    return Math.round(value * multiplier) / multiplier;
+	var multiplier = Math.pow(10, precision || 0);
+	return Math.round(value * multiplier) / multiplier;
 }
 
 chunkPerc = 0;
 let bar = document.getElementById("statusBarUpload" + chunkPerc);
 
-function updateSentChunks(){
+function updateSentChunks() {
 	bar = document.getElementById("statusBarUpload" + chunkPerc);
 	chunkPerc = _chunks_send / _chunks_total_send;
 	chunckPerc = Math.round(_chunks_send / _chunks_total_send * 10) / 10;
-	chunkPerc = round(round(_chunks_send / _chunks_total_send * 10) / 10 * 10 , 0)
+	chunkPerc = round(round(_chunks_send / _chunks_total_send * 10) / 10 * 10, 0)
 	bar.id = "statusBarUpload" + chunkPerc;
 	console.log(chunkPerc);
 }
 const encrypt = (text) => {
-    return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
-  };
-  
-  const decrypt = (data) => {
-    return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
-  };
+	return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(text));
+};
 
-function getLink(pswd){
-	
+const decrypt = (data) => {
+	return CryptoJS.enc.Base64.parse(data).toString(CryptoJS.enc.Utf8);
+};
+
+function getLink(pswd) {
+
 	var e_user = encrypt(userr);
 	var e_pw = encrypt(pswd);
 	var link = "https://gigadrive.ddns.net/auth?user=" + e_user + "&pswd=" + e_pw;
 	console.log(link);
 }
 
-document.getElementById("search").addEventListener("input", function() {
+document.getElementById("search").addEventListener("input", function () {
 
 	let searchQuery = this.value.toLowerCase();
 	console.log(searchQuery);
 	let ll = document.querySelectorAll('.fileLink');
 	console.log(ll);
 
-	ll.forEach(function(contact) {
-			let contactName = contact.textContent.toLowerCase();
-			if (contactName.includes(searchQuery)) {
-					contact.classList.remove('hiddenResult');
-					contact.classList.remove('displayNone');
-			} else {
-					contact.classList.add('hiddenResult');
-					setTimeout(function() {
-							contact.classList.add('displayNone');
-					}, 400);
-			}
+	ll.forEach(function (contact) {
+		let contactName = contact.textContent.toLowerCase();
+		if (contactName.includes(searchQuery)) {
+			contact.classList.remove('hiddenResult');
+			contact.classList.remove('displayNone');
+		} else {
+			contact.classList.add('hiddenResult');
+			setTimeout(function () {
+				contact.classList.add('displayNone');
+			}, 400);
+		}
 	});
 
 });
@@ -280,6 +291,7 @@ let cancelSelectBtn = document.getElementById("cancelSelectBtn");
 let selectInfo = document.getElementById("selectInfo");
 let saveSelection = document.getElementById("saveSelection");
 let deleteSelection = document.getElementById("deleteSelection");
+let slcAllSelection = document.getElementById("slcAllSelection");
 
 function selectMenu() {
 	console.log("selectMenu");
@@ -288,21 +300,32 @@ function selectMenu() {
 	selectInfo.style.display = "block";
 	saveSelection.style.display = "block";
 	deleteSelection.style.display = "block";
-
+	slcAllSelection.style.display = "block";
+	slcAllSelection.addEventListener("click", function () {
+		let fileLinks = document.querySelectorAll(".fileLink:not(.hidden)");
+		fileLinks.forEach(function (fileLink, index) {
+			setTimeout(() => {
+				fileLink.classList.add("selectedOne");
+				setTimeout(() => {
+					fileLink.classList.add("selectedTwo");
+				}, 200);
+			}, index * 25);
+		});
+	});
 	let fileLinks = document.querySelectorAll(".fileLink");
-	fileLinks.forEach(function(fileLink) {
+	fileLinks.forEach(function (fileLink) {
 		fileLink.classList.add("selecting");
 	});
 
 	console.log("selectMenu");
 
-	fileLinks.forEach(function(fileLink) {
-		fileLink.addEventListener("click", function() {
+	fileLinks.forEach(function (fileLink) {
+		fileLink.addEventListener("click", function () {
 			fileLink.classList.toggle("selectedOne");
 			setTimeout(() => {
 				fileLink.classList.toggle("selectedTwo");
 			}, 500);
 		});
 	});
-	// while being in select mode, you can click on a file to select it
+	// selected files have class (.selectedOne and) .selectedTwo. -> actions
 }

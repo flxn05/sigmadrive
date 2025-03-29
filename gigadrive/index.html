@@ -47,10 +47,11 @@
 		</div>
 		<div class="headFiles">
 			<div class="filesFilterCon">
-				<div onclick="window.location.reload()" class="filesFilterFilter hidden" id="cancelSelectBtn">CANCEL</div>
+				<div onclick="" class="filesFilterFilter hidden" style="color: rgb(255, 97, 97);" id="cancelSelectBtn">CANCEL</div>
 				<div onclick="selectMenu()" class="filesFilterFilter" id="selectBtn">SELECT</div>
-					<div onclick="" class="filesFilterFilter hidden" id="saveSelection">[SAVE]</div>
-					<div onclick="" class="filesFilterFilter hidden" id="deleteSelection">[DELETE]</div>
+				<div onclick="" class="filesFilterFilter hidden" id="saveSelection">[SAVE]</div>
+				<div onclick="" class="filesFilterFilter hidden" id="deleteSelection">[DELETE]</div>
+				<div onclick="" class="filesFilterFilter hidden" id="slcAllSelection">[slcALL]</div>
 				<div onclick="clearFilter()" class="filesFilter"
 					style="background-image: linear-gradient(135deg, var(--primary), var(--primary), var(--accenthalf), var(--fileFocus)); filter: brightness(1.5);">
 					ALL</div>
@@ -62,14 +63,14 @@
 				<div onclick="filter('purple')" class="filesFilter" style="background-color: var(--purple);"></div>
 				<div onclick="filter('white')" class="filesFilter" style="background-color: var(--white);"></div>
 
-				</div> <!--filterfilter-->
-			</div>
-			<div id="selectInfo">Select items by clicking, then choose the actions above.</div>
-			<div id="fileList">
-				<div class="loading">loading your files ...</div>
-				<!--file list here-->
-				<div class="fileLink">filelink</div>
-			</div><!--close filelist-->
+			</div> <!--filterfilter-->
+		</div>
+		<div id="selectInfo">Select items by clicking, then choose the actions above.</div>
+		<div id="fileList">
+			<div class="loading">loading your files ...</div>
+			<!--file list here-->
+			<div class="fileLink">filelink</div>
+		</div><!--close filelist-->
 	</section><!--close filearea-->
 
 
@@ -136,7 +137,7 @@
 
 	<!--hidden-->
 	<div id="settingsPopupCon" class="popupCon">
-		<div id="" class="popup">
+		<div id="settingspopupStyle" class="popup">
 			<img src="settings.svg" class="popupIcon">
 			<h2 id="popupSettingsUsername">About</h2>
 			<div class="breaker"></div>
@@ -147,10 +148,17 @@
 				<p style="font-size: .9rem; color: grey; text-align: center;">Backend: David Ott<br>Frontend: Jonathan
 					Wallasch<br>Design: Felix Nowak<br><a href="https://icons8.com" target="_blank"
 						style="font-size: .9rem; color: grey; text-decoration: underline;">Icons by Icons8</a></p>
+
 				<p style="text-align: center;">version</p>
 				<p style="font-size: .9rem; color: grey; text-align: center; line-height: 1rem;"> 2.4 (development)</p>
 				<p style="font-size: .9rem; color: grey; text-align: center; line-height: 1rem;">Update: link sharing, Tags</p>
-				<p style="text-align: center;" class="shareLink">share this workspace</p>
+
+				<p style="text-align: center;">collaboration link</p>
+				<p style="font-size: .9rem; color: rgba(172, 88, 88, 0.918); text-align: center; line-height: 1rem;">only share
+					with people you trust.</p>
+				<input type="text" id="userNameInput" placeholder="enter your username">
+				<input type="text" id="passwordInput" placeholder="enter your password">
+				<button id="generate">Generate</button>
 				<!--development, beta, public-->
 				<div style="display: flex; justify-content: center; margin-top: 2rem;">
 					<button class="secondary" onclick="
@@ -370,7 +378,7 @@
 				h1.style.filter = "blur(1px)";
 				settingsLink.classList.add("active");
 				homeLink.classList.remove("active");
-				document.title = "Settings | gigaDrive";
+				document.title = "About | gigaDrive";
 				document.getElementById("popupSettingsUsername").innerHTML = userr;
 			}
 
