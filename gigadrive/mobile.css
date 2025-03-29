@@ -114,6 +114,7 @@ h1 {
   font-size: 2rem;
   text-align: center;
   color: white;
+  user-select: none;
 }
 
 h2 {
@@ -1142,15 +1143,31 @@ h4 {
   100% {translate: 28px; transform: scale(.85); box-shadow: 6px 6px 12px var(--popup);}
 }
 
-.selected {
-  animation: selectedNow 3s ease both infinite;
+.selectedOne {
+  animation: selectedOne .15s ease both;
+  translate: 28px;
+  transform: scale(.85);
+  box-shadow: 6px 6px 12px var(--popup);
 }
 
-@keyframes selectedNow {
-  0% {background-color: var(--fileFocus)}
-  50% {background-color: var(--accenthalf);}
-  100% {background-color: var(--fileFocus)}
+@keyframes selectedOne {
+  0% {background-color: var(--fileFocus); transform: scale(.85);}
+  100% {background-color: var(--accenthalf); filter: brightness(1.2); translate: -12px; transform: scale(.9);}
 }
+
+.selectedTwo {
+  animation: selectedTwo 20s ease both infinite;
+  transform: scale(.9);
+  filter: brightness(1.2);
+  box-shadow: 6px 6px 12px var(--popup);
+}
+
+@keyframes selectedTwo {
+  0% {background-color: var(--accenthalf); translate: -12px;}
+  50% {background-color: var(--accent);}
+  100% {background-color: var(--accenthalf); translate: -12px;}
+}
+
 
 #selectInfo {
   display: none;

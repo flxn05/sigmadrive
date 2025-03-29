@@ -278,12 +278,16 @@ document.getElementById("search").addEventListener("input", function() {
 let selectBtn = document.getElementById("selectBtn");
 let cancelSelectBtn = document.getElementById("cancelSelectBtn");
 let selectInfo = document.getElementById("selectInfo");
+let saveSelection = document.getElementById("saveSelection");
+let deleteSelection = document.getElementById("deleteSelection");
 
 function selectMenu() {
 	console.log("selectMenu");
 	selectBtn.style.display = "none";
 	cancelSelectBtn.style.display = "block";
 	selectInfo.style.display = "block";
+	saveSelection.style.display = "block";
+	deleteSelection.style.display = "block";
 
 	let fileLinks = document.querySelectorAll(".fileLink");
 	fileLinks.forEach(function(fileLink) {
@@ -292,6 +296,13 @@ function selectMenu() {
 
 	console.log("selectMenu");
 
-
+	fileLinks.forEach(function(fileLink) {
+		fileLink.addEventListener("click", function() {
+			fileLink.classList.toggle("selectedOne");
+			setTimeout(() => {
+				fileLink.classList.toggle("selectedTwo");
+			}, 500);
+		});
+	});
 	// while being in select mode, you can click on a file to select it
 }

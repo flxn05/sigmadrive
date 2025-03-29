@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<!--fix html injections-->
 
 <head>
 	<meta charset="UTF-8">
@@ -34,26 +35,22 @@
 	<div class="start">
 		<div>verifying...</div>
 	</div>
-	<h1 id="h1">gigaDrive</h1>
+	<h1 id="h1" onclick="window.location.reload()">gigaDrive</h1>
 	<div class="spacer"></div>
 	</section>
 	<div class="spacer"></div>
 	<section id="fileArea">
 		<div class="searchCon">
 
-			<input type="text" id="search" placeholder="Search for files" autocomplete="off" spellcheck="false" >
+			<input type="text" id="search" placeholder="Search for files" autocomplete="off" spellcheck="false">
 		</div>
-		<!--appear when long pressed or selection
-		<div class="filesFilterCon">
-			<div onclick="" class="filesFilterFilter">[LOAD]</div>
-			<div onclick="" class="filesFilterFilter">[ZIPLOAD]</div>
-			<div onclick="" class="filesFilterFilter">[CANCEL], remove</div>
-		-->
 		</div>
 		<div class="headFiles">
 			<div class="filesFilterCon">
 				<div onclick="window.location.reload()" class="filesFilterFilter hidden" id="cancelSelectBtn">CANCEL</div>
 				<div onclick="selectMenu()" class="filesFilterFilter" id="selectBtn">SELECT</div>
+					<div onclick="" class="filesFilterFilter hidden" id="saveSelection">[SAVE]</div>
+					<div onclick="" class="filesFilterFilter hidden" id="deleteSelection">[DELETE]</div>
 				<div onclick="clearFilter()" class="filesFilter"
 					style="background-image: linear-gradient(135deg, var(--primary), var(--primary), var(--accenthalf), var(--fileFocus)); filter: brightness(1.5);">
 					ALL</div>
@@ -65,14 +62,14 @@
 				<div onclick="filter('purple')" class="filesFilter" style="background-color: var(--purple);"></div>
 				<div onclick="filter('white')" class="filesFilter" style="background-color: var(--white);"></div>
 
-			</div> <!--filterfilter-->
-		</div>
-		<div id="selectInfo">Select items by clicking, then choose the actions above.</div>
-		<div id="fileList">
-			<div class="loading">loading your files ...</div>
-			<!--file list here-->
-			<div class="fileLink">filelink</div>
-		</div><!--close filelist-->
+				</div> <!--filterfilter-->
+			</div>
+			<div id="selectInfo">Select items by clicking, then choose the actions above.</div>
+			<div id="fileList">
+				<div class="loading">loading your files ...</div>
+				<!--file list here-->
+				<div class="fileLink">filelink</div>
+			</div><!--close filelist-->
 	</section><!--close filearea-->
 
 
@@ -114,14 +111,14 @@
 				</div>
 				<input type="file" id="addFile" style="opacity: 0; scale: 0;" multiple>
 				<div style="width: 100%; display: flex; justify-content: center;"><!--open container-->
-				<div class="primarySecondaryContainer buttons">
-					<div onclick="filter('red')" class="filesFilter" style="background-color: var(--red);"></div>
-					<div onclick="filter('green')" class="filesFilter" style="background-color: var(--green);"></div>
-					<div onclick="filter('yellow')" class="filesFilter" style="background-color: var(--yellow);"></div>
-					<div onclick="filter('blue')" class="filesFilter" style="background-color: var(--blue);"></div>
-					<div onclick="filter('purple')" class="filesFilter" style="background-color: var(--purple);"></div>
-					<div onclick="filter('white')" class="filesFilter" style="background-color: var(--white);"></div>
-				</div>
+					<div class="primarySecondaryContainer buttons">
+						<div onclick="filter('red')" class="filesFilter" style="background-color: var(--red);"></div>
+						<div onclick="filter('green')" class="filesFilter" style="background-color: var(--green);"></div>
+						<div onclick="filter('yellow')" class="filesFilter" style="background-color: var(--yellow);"></div>
+						<div onclick="filter('blue')" class="filesFilter" style="background-color: var(--blue);"></div>
+						<div onclick="filter('purple')" class="filesFilter" style="background-color: var(--purple);"></div>
+						<div onclick="filter('white')" class="filesFilter" style="background-color: var(--white);"></div>
+					</div>
 				</div><!--close container-->
 				<input type="text" id="tag" placeholder="Tags" style="color: black;" class="inputField">
 				<div class="primarySecondaryContainer">
@@ -467,46 +464,46 @@
 		//pls fix @ joni
 
 		document.addEventListener("DOMContentLoaded", function () {
-    const searchInput = document.querySelector("#search");
-    const fileList = document.querySelector("#fileList");
-    const fileLinks = document.querySelectorAll(".fileLink");
-    
-    const noResultsMessage = document.createElement("div");
-    noResultsMessage.textContent = "No matches found.";
-    noResultsMessage.style.display = "none";
-    noResultsMessage.style.color = "red";
-    fileList.appendChild(noResultsMessage);
-    
-    searchInput.addEventListener("input", function () {
-			console.log("searching");
-        const query = searchInput.value.toLowerCase();
-        let matchFound = false;
+			const searchInput = document.querySelector("#search");
+			const fileList = document.querySelector("#fileList");
+			const fileLinks = document.querySelectorAll(".fileLink");
 
-        if (query !== "") {
-            searchInput.style.width = "92vw";
-            searchInput.style.height = "3rem";
-        } else {
-            searchInput.style.width = "";
-            searchInput.style.height = "";
-        }
+			const noResultsMessage = document.createElement("div");
+			noResultsMessage.textContent = "No matches found.";
+			noResultsMessage.style.display = "none";
+			noResultsMessage.style.color = "red";
+			fileList.appendChild(noResultsMessage);
 
-        fileLinks.forEach(link => {
-            if (link.textContent.toLowerCase().includes(query)) {
-                link.classList.remove("noMatch");
-                link.style.display = "";
-                matchFound = true;
-            } else {
-                link.classList.add("noMatch");
-                setTimeout(() => {
-                    link.classList.remove("noMatch");
-                    link.style.display = "none";
-                }, 1000);
-            }
-        });
+			searchInput.addEventListener("input", function () {
+				console.log("searching");
+				const query = searchInput.value.toLowerCase();
+				let matchFound = false;
 
-        noResultsMessage.style.display = matchFound ? "none" : "block";
-    });
-});
+				if (query !== "") {
+					searchInput.style.width = "92vw";
+					searchInput.style.height = "3rem";
+				} else {
+					searchInput.style.width = "";
+					searchInput.style.height = "";
+				}
+
+				fileLinks.forEach(link => {
+					if (link.textContent.toLowerCase().includes(query)) {
+						link.classList.remove("noMatch");
+						link.style.display = "";
+						matchFound = true;
+					} else {
+						link.classList.add("noMatch");
+						setTimeout(() => {
+							link.classList.remove("noMatch");
+							link.style.display = "none";
+						}, 1000);
+					}
+				});
+
+				noResultsMessage.style.display = matchFound ? "none" : "block";
+			});
+		});
 
 
 

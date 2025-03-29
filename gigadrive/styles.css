@@ -114,6 +114,7 @@ h1 {
   position: fixed;
   top: 24px;
   left: 36px;
+  user-select: none;
 }
 
 h2 {
@@ -1115,14 +1116,30 @@ select {
   100% {translate: 28px; transform: scale(.85); box-shadow: 6px 6px 12px var(--popup);}
 }
 
-.selected {
-  animation: selectedNow 3s ease both infinite;
+.selectedOne {
+  animation: selectedOne .15s ease both;
+  translate: 28px;
+  transform: scale(.85);
+  box-shadow: 6px 6px 12px var(--popup);
 }
 
-@keyframes selectedNow {
-  0% {background-color: var(--fileFocus)}
-  50% {background-color: var(--accenthalf);}
-  100% {background-color: var(--fileFocus)}
+@keyframes selectedOne {
+  0% {background-color: var(--fileFocus); transform: scale(.85);}
+  100% {background-color: var(--accenthalf); transform: scale(1.025); filter: brightness(1.2);}
+}
+
+.selectedTwo {
+  animation: selectedTwo 20s ease both infinite;
+  translate: 28px;
+  transform: scale(1.025);
+  filter: brightness(1.2);
+  box-shadow: 6px 6px 12px var(--popup);
+}
+
+@keyframes selectedTwo {
+  0% {background-color: var(--accenthalf)}
+  50% {background-color: var(--accent);}
+  100% {background-color: var(--accenthalf)}
 }
 
 #selectInfo {
